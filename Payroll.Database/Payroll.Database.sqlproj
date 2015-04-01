@@ -63,5 +63,12 @@
     <Build Include="Tables\Employee.sql" />
     <Build Include="Tables\Paycheck.sql" />
     <Build Include="Tables\SalesReceipt.sql" />
+    <Build Include="Tables\TimeCard.sql" />
+    <Build Include="Tables\UnionServiceCharge.sql" />
+    <Build Include="Tables\Union.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Payroll.Database.publish.xml" />
+    <None Include="Payroll.Database.Test.publish.xml" />
   </ItemGroup>
 </Project>
