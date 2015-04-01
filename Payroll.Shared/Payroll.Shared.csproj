@@ -39,6 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContracts\Employee.cs" />
+    <Compile Include="DataContracts\Paycheck.cs" />
+    <Compile Include="DataContracts\SalesReceipt.cs" />
+    <Compile Include="DataContracts\TimeCard.cs" />
+    <Compile Include="DataContracts\Union.cs" />
+    <Compile Include="DataContracts\UnionServiceCharge.cs" />
     <Compile Include="Interfaces\IAccessorLocator.cs" />
     <Compile Include="Interfaces\ICheckPrinterAccessor.cs" />
     <Compile Include="Interfaces\IDeliveryManager.cs" />
@@ -53,10 +59,7 @@
     <Compile Include="Interfaces\IPayrollManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Contracts\" />
-    <Folder Include="DataContracts\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

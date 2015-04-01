@@ -1,5 +1,4 @@
-﻿using System;
-using Payroll.Shared.Interfaces;
+﻿using Payroll.Shared.Interfaces;
 
 namespace Payroll.Managers
 {
