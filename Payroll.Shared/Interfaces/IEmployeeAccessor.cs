@@ -5,6 +5,6 @@ namespace Payroll.Shared.Interfaces
     public interface IEmployeeAccessor
     {
         string TestMe(string input);
-        Employee Save(string connectionString, Employee employee);
+        Employee Save(string connString, Employee employee);
     }
 }
