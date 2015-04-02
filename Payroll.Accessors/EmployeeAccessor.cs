@@ -36,20 +36,6 @@ namespace Payroll.Accessors
 
                 return employee;
             }
-            //using (var db = new PayrollDatabase())
-            //{
-            //    if (employee.Id == 0)
-            //    {
-            //        db.Employees.Add(employee);
-            //    }
-            //    else
-            //    {
-            //        db.Employees.Attach(employee);
-            //        db.Entry(employee).State = System.Data.Entity.EntityState.Modified;
-            //    }
-            //    db.SaveChanges();
-            //    return employee;
-            //}
         }
     }
 }
