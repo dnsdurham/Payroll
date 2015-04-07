@@ -16,7 +16,7 @@ namespace Payroll.Accessors
         public Employee Save(string connString, Employee employee)
         {
             // check the data validity
-            if (string.IsNullOrEmpty(employee.FirstName))
+            if ((string.IsNullOrEmpty(employee.FirstName)) || (string.IsNullOrEmpty(employee.LastName)))
             {
                 throw new ArgumentException();
             }
@@ -26,7 +26,7 @@ namespace Payroll.Accessors
                 conn.Open();
                 if (employee.Id == 0)
                 {
-                    //create a new product
+                    //create a new employee
                     employee.Id = conn.Insert(employee);
                 }
                 else
@@ -35,6 +35,32 @@ namespace Payroll.Accessors
                 }
 
                 return employee;
+            }
+        }
+
+
+        public Union Save(string connString, Union union)
+        {
+            // check the data validity
+            if ((string.IsNullOrEmpty(union.Name)) || (union.Dues < 0M))
+            {
+                throw new ArgumentException();
+            }
+
+            using (var conn = new SqlConnection(connString))
+            {
+                conn.Open();
+                if (union.Id == 0)
+                {
+                    //create a new union
+                    union.Id = conn.Insert(union);
+                }
+                else
+                {
+                    conn.Update(union);
+                }
+
+                return union;
             }
         }
     }

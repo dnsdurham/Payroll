@@ -29,6 +29,10 @@ namespace Payroll.Tests.AccessorTests
 
         #region Utilities
 
+        /// <summary>
+        /// Creates a new instance of a generic employee
+        /// </summary>
+        /// <returns></returns>
         private Employee NewEmployee()
         {
             return new Employee()
@@ -38,6 +42,28 @@ namespace Payroll.Tests.AccessorTests
                 LastName = "Blansten"
             };
             
+        }
+
+        /// <summary>
+        /// Creates a new instance of a generic union
+        /// </summary>
+        /// <returns></returns>
+        private Union NewUnion()
+        {
+            return new Union()
+            {
+                Dues = 1.00M,
+                Name = "Test Union"
+            };
+        }
+
+        /// <summary>
+        /// Create a union record in the database to be used by the other tests
+        /// </summary>
+        /// <returns>Union</returns>
+        private Union CreateUnionRecord()
+        {
+            return _empAccessor.Save(_connectionString, NewUnion());
         }
 
         #endregion
@@ -50,21 +76,27 @@ namespace Payroll.Tests.AccessorTests
             Assert.AreEqual("test", engine.TestMe("test"));
         }
 
+        #region Employee Tests
+        
         /// <summary>
         /// This test verifies we can save a new employee
         /// </summary>
         [TestMethod]
         public void EmployeeAccessor_SaveNew()
         {
-            Employee emp = NewEmployee();
+            var emp = NewEmployee();
             _empAccessor.Save(_connectionString, emp);
 
             // test basic employee data save
             Assert.IsTrue(emp.Id > 0);
+            Assert.IsTrue(emp.FirstName == NewEmployee().FirstName);
+            Assert.IsTrue(emp.LastName == NewEmployee().LastName);
+            Assert.IsTrue(emp.HireDate == NewEmployee().HireDate);
 
             // test for a valid reference to a union
-            Employee empUnion = NewEmployee();
-            empUnion.UnionId = 1; // setting it to the static test union in the test db
+            var empUnion = NewEmployee();
+            var union = CreateUnionRecord();
+            empUnion.UnionId = union.Id; 
             _empAccessor.Save(_connectionString, empUnion);
             Assert.IsTrue(empUnion.Id > 0);
             Assert.IsTrue(empUnion.UnionId > 0);
@@ -77,7 +109,7 @@ namespace Payroll.Tests.AccessorTests
         [ExpectedException(typeof(SqlException))]
         public void EmployeeAccessor_SaveNewInvalidUnion()
         {
-            Employee emp = NewEmployee();
+            var emp = NewEmployee();
 
             // Test an invalid union reference
             emp.UnionId = 0; // set it to an invalid union key
@@ -85,20 +117,78 @@ namespace Payroll.Tests.AccessorTests
         }
 
         /// <summary>
+        /// this test verifies that we are throwing exceptions when we have invalid first name
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void EmployeeAccessor_InvalidFirstName()
+        {
+            var emp = NewEmployee();
+            // clear the FirstName
+            emp.FirstName = "";
+            _empAccessor.Save(_connectionString, emp); // should throw exception
+        }
+
+        /// <summary>
+        /// this test verifies that we are throwing exceptions when we have invalid first name
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void EmployeeAccessor_InvalidLastName()
+        {
+            var emp = NewEmployee();
+            // clear the FirstName
+            emp.LastName = "";
+            _empAccessor.Save(_connectionString, emp); // should throw exception
+        }
+
+        #endregion
+
+
+        #region Union Tests
+
+        /// <summary>
+        /// Verfies the ability to add a union
+        /// </summary>
+        [TestMethod]
+        public void EmployeeAccessor_SaveNewUnion()
+        {
+            var union = NewUnion();
+            _empAccessor.Save(_connectionString, union);
+
+            // test basic union data save
+            Assert.IsTrue(union.Id > 0);
+            Assert.IsTrue(union.Dues == NewUnion().Dues);
+            Assert.IsTrue(union.Name == NewUnion().Name);
+        }
+
+        /// <summary>
         /// this test verifies that we are throwing exceptions when we have invalid field data
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void EmployeeAccesor_SaveNewInvalidFirstName()
+        public void EmployeeAccessor_InvalidUnionName()
         {
-            Employee emp = NewEmployee();
-            // clear the FirstName
-            emp.FirstName = "";
-            _empAccessor.Save(_connectionString, emp);  
-            Assert.Fail();
-
-            // TODO: add tests for other fields
+            var union = NewUnion();
+            // clear the Name
+            union.Name = "";
+            _empAccessor.Save(_connectionString, union); // should throw exception
         }
+
+        /// <summary>
+        /// this test verifies that we are throwing exceptions when we have invalid field data
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void EmployeeAccessor_SaveUnionInvalidDues()
+        {
+            var union = NewUnion();
+            // Set the dues < 0
+            union.Dues = -1.00M;
+            _empAccessor.Save(_connectionString, union); // should throw exception
+        }
+
+        #endregion
 
         [TestCleanup]
         public void TestCleanup()

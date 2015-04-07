@@ -1,4 +1,5 @@
-﻿using Payroll.Shared.DataContracts;
+﻿using System;
+using Payroll.Shared.DataContracts;
 
 namespace Payroll.Shared.Interfaces
 {
@@ -6,5 +7,6 @@ namespace Payroll.Shared.Interfaces
     {
         string TestMe(string input);
         Employee Save(string connString, Employee employee);
+        Union Save(string connString, Union union);
     }
 }
