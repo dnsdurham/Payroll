@@ -71,4 +71,7 @@
     <None Include="Payroll.Database.publish.xml" />
     <None Include="Payroll.Database.Test.publish.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Payroll.Database.refactorlog" />
+  </ItemGroup>
 </Project>
