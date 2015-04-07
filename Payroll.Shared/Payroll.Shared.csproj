@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="DataContracts\Employee.cs" />
     <Compile Include="DataContracts\Paycheck.cs" />
+    <Compile Include="DataContracts\PayrollDataItem.cs" />
     <Compile Include="DataContracts\SalesReceipt.cs" />
     <Compile Include="DataContracts\TimeCard.cs" />
     <Compile Include="DataContracts\Union.cs" />

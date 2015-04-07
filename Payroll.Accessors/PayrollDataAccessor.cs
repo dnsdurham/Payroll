@@ -8,5 +8,15 @@ namespace Payroll.Accessors
         {
             return input;
         }
+
+        public Shared.DataContracts.PayrollDataItem[] GetPayrollItems(long employeeId, System.DateTime payDate)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Shared.DataContracts.TimeCard[] GetTimeCards(long employeeId, System.DateTime payDate)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

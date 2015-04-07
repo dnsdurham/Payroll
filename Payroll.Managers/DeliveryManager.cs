@@ -10,5 +10,10 @@ namespace Payroll.Managers
             result = AccessorLocator.CreateAccessor<ICheckPrinterAccessor>().TestMe(result);
             return AccessorLocator.CreateAccessor<IDirectDepositAccessor>().TestMe(result);
         }
+
+        public void DeliverPaycheck(long paycheckId)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

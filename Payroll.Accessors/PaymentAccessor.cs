@@ -8,5 +8,10 @@ namespace Payroll.Accessors
         {
             return input;
         }
+
+        public Shared.DataContracts.Paycheck Save(string connString, Shared.DataContracts.Paycheck paycheck)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
