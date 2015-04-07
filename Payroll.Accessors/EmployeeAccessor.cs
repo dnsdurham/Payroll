@@ -63,5 +63,10 @@ namespace Payroll.Accessors
                 return union;
             }
         }
+
+        public Employee[] GetEmployeesByPaydate(DateTime payDate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

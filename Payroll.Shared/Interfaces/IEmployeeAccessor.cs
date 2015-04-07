@@ -8,5 +8,6 @@ namespace Payroll.Shared.Interfaces
         string TestMe(string input);
         Employee Save(string connString, Employee employee);
         Union Save(string connString, Union union);
+        Employee[] GetEmployeesByPaydate(DateTime payDate);
     }
 }

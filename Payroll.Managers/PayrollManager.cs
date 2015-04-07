@@ -11,5 +11,10 @@ namespace Payroll.Managers
             result = AccessorLocator.CreateAccessor<IPaymentAccessor>().TestMe(result);
             return EngineLocator.CreateEngine<IPaymentEngine>().TestMe(result);
         }
+
+        public void ProcessPayroll(System.DateTime payrollDate)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
